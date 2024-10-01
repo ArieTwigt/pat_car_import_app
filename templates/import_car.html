@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h1> Import Car</h1>
+        
+                <form action="/import_car" method="post">
+                    <label for="brand" class="form-label">Merk</label>
+                    <input type="text" 
+                           name="brand"
+                           class="form-control" 
+                           id="brand" 
+                           placeholder="bvb. audi">
+                    <button class="btn btn-success" type="submit">Zoek</button>
+                </form>
+            </div>
+          </div>
+        
+    </div>
+
+    <div class="col-md-9">
+        <table class="table table-striped" id="cars_table">
+            <thead>
+                <th>Kenteken:</th>
+                <th>Merk:</th>
+                <th>Model:</th>
+                <th>Prijs:</th>
+            </thead>
+            <tbody>
+                {% for car in cars_list %}
+                <tr>
+                    <td> 
+                        <button type="button" class="btn btn-warning">
+                            {{ car.kenteken }}
+                        </button>
+                    </td>
+                    <td> {{ car.merk }} </td>
+                    <td> {{ car.handelsbenaming }} </td>
+                    <td> € {{ car.catalogusprijs }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready( function () {
+        $('#cars_table').DataTable();
+    } );
+</script>
+
+{% endblock %}
